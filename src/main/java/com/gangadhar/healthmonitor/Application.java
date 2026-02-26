@@ -1,5 +1,6 @@
 package com.gangadhar.healthmonitor;
 
+import com.gangadhar.healthmonitor.indicator.DiskSpaceHealthIndicator;
 import com.gangadhar.healthmonitor.indicator.InternetHealthIndicator;
 import com.gangadhar.healthmonitor.model.HealthStatus;
 import com.gangadhar.healthmonitor.service.HealthCheckService;
@@ -12,6 +13,7 @@ public class Application {
         HealthCheckService service = new HealthCheckService();
 
         service.addIndicator(new InternetHealthIndicator());
+        service.addIndicator(new DiskSpaceHealthIndicator());
 
         List<HealthStatus> results = service.performHealthChecks();
 
