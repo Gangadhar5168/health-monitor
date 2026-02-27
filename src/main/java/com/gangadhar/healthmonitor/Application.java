@@ -5,6 +5,7 @@ import com.gangadhar.healthmonitor.indicator.FileJobHealthIndicator;
 import com.gangadhar.healthmonitor.indicator.InternetHealthIndicator;
 import com.gangadhar.healthmonitor.indicator.MemoryHealthIndicator;
 import com.gangadhar.healthmonitor.model.HealthStatus;
+import com.gangadhar.healthmonitor.report.ReportBuilder;
 import com.gangadhar.healthmonitor.service.HealthCheckService;
 
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class Application {
         service.addIndicator(new DiskSpaceHealthIndicator());
         service.addIndicator(new MemoryHealthIndicator());
         service.addIndicator(new FileJobHealthIndicator());
-
         List<HealthStatus> results = service.performHealthChecks();
+        ReportBuilder reportBuilder = new ReportBuilder();
+        String report = reportBuilder.buildHtmlReport(results);
+        System.out.println(report);
 
-        for (HealthStatus status : results){
-            System.out.println(status);
-        }
+//        for (HealthStatus status : results){
+//            System.out.println(status);
+//        }
 
     }
 }
